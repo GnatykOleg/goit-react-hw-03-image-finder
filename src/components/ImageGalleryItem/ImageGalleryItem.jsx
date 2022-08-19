@@ -1,2 +1,10 @@
+// import s from './Friend.module.css';
 // import PropTypes from 'prop-types';
-// import s from './ImageGalleryItem.module.css';
+
+export default function ImageGalleryItem({ id, webformatURL, tags }) {
+  return (
+    <li>
+      <img src={webformatURL} alt={tags} width="240" />
+    </li>
+  );
+}
