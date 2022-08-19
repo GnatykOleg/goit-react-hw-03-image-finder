@@ -1,5 +1,5 @@
 // import PropTypes from 'prop-types';
-import s from './Modal.module.css';
+// import s from './Modal.module.css';
 export default function Modal() {
   return (
     // <div className={s.overlay}>
