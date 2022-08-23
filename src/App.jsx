@@ -22,12 +22,8 @@ export class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     const { value, page } = this.state;
-    if (value !== prevState.value) {
-      this.setState({ status: 'pending', images: [], page: 1 });
-      this.fetchImages();
-    }
-
-    if (page !== prevState.page) {
+    if (value !== prevState.value || page !== prevState.page) {
+      this.setState({ status: 'pending' });
       this.fetchImages();
     }
   }
@@ -65,7 +61,7 @@ export class App extends Component {
   };
 
   inputValue = value => {
-    this.setState({ value });
+    this.setState({ value, images: [], page: 1 });
   };
 
   handleLoadMore = () => {
@@ -85,11 +81,11 @@ export class App extends Component {
   };
 
   render() {
-    const { images, showModal, tags, status, largeImageURL, totalHits } =
+    const { images, showModal, tags, status, largeImageURL, totalHits, page } =
       this.state;
     return (
       <>
-        <Searchbar inputValue={this.inputValue} />
+        <Searchbar inputValue={this.inputValue} page={page} />
         <ImageGallery images={images} onSelectImage={this.onSelectImage} />
         {totalHits > images.length && status !== 'pending' && (
           <Button handleLoadMore={this.handleLoadMore} />
