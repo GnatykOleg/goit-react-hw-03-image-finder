@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
-// import PropTypes from 'prop-types';
+import 'react-toastify/dist/ReactToastify.css';
 import s from './Searchbar.module.css';
 
 export default class Searchbar extends Component {
@@ -13,43 +14,42 @@ export default class Searchbar extends Component {
   };
 
   handleSubmit = event => {
+    const { value } = this.state;
+    const { inputValue } = this.props;
     event.preventDefault();
 
-    if (this.state.value.trim() === '') {
-      return toast.warn('Please input text...', {
-        position: 'top-center',
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-      });
+    if (value.trim() === '') {
+      return toast.error('Please type text....', { pauseOnHover: false });
     }
 
-    this.props.inputValue(this.state.value);
+    inputValue(value);
+
     this.setState({ value: '' });
   };
 
   render() {
+    const { value } = this.state;
     return (
       <header className={s.searchbar}>
         <form className={s.form} onSubmit={this.handleSubmit}>
-          <button type="submit" className={s.button}>
-            <span className={s.buttonLabel}>Search</span>
-          </button>
-
           <input
             onChange={this.handleInputChange}
-            value={this.state.value}
-            className="input"
+            value={value}
+            className={s.input}
             type="text"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
           />
+          <button type="submit" className={s.button}>
+            Search
+          </button>
         </form>
       </header>
     );
   }
 }
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func,
+};
