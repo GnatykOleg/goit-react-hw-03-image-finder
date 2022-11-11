@@ -21,3 +21,5 @@
 #### - Description of the Loader component Spinner component, displayed while loading images. Used react-loader-spinner.
 
 #### - Description of the Modal component a window with a dark overlay and a larger version of the image is displayed. Modal The window is closed by pressing the ESC key or by clicking on the overlay.
+
+![gallery](./public/gallery.jpg)
